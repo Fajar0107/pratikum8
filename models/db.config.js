@@ -1,21 +1,10 @@
-const mysql = require('mysql2');
+const mysql = require("mysql2/promise");
 
-// Konfigurasi koneksi database
-const db = mysql.createConnection({
-  host: '127.0.0.1',   // lebih aman daripada 'localhost'
-  user: 'root',
-  password: '',        // kosong kalau XAMPP
-  database: 'dbpratikum8',
-  port: 3306           // penting! agar connect ke MySQL XAMPP
+const pool = mysql.createPool({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "dbpratikum8",   // <- samakan dengan nama di phpMyAdmin
 });
 
-// Coba koneksi
-db.connect(err => {
-  if (err) {
-    console.error('Koneksi database gagal:', err);
-  } else {
-    console.log('Terhubung ke database MySQL');
-  }
-});
-
-module.exports = db;
+module.exports = pool;
